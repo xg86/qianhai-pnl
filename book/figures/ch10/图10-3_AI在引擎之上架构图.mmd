@@ -1,0 +1,31 @@
+%% 图 10-3 AI 在引擎之上，不在引擎之内（ch10 §10.6）
+%% 主题：节点深蓝底白字 #0D2B42；强调节点橙 #F8982E；决策/警示节点灰 #8C8C8C
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#0D2B42', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#0D2B42', 'lineColor': '#8C8C8C', 'fontFamily': 'SimHei, Noto Sans CJK SC, Microsoft YaHei, sans-serif', 'fontSize': '15px'}}}%%
+flowchart BT
+    subgraph ENG["<b>MVE 估值引擎（引擎之内，没有 AI）</b>"]
+        E1["<b>统一计算</b><br/>估值 · 绩效 · 归因 · 风险<br/>同一批持仓 · 同一张行情快照"]
+        E2["<b>可追溯 · 可复核</b><br/>每个数字挂着：批次号 · 指标名 · 估值日<br/>批次优先：昨晚批处理算好的同一批数"]
+    end
+    subgraph AIL["<b>AI 层（引擎之上，不碰数字的产生）</b>"]
+        A1["<b>投研助手</b><br/>问数：大白话查系统<br/>诊断：对着数字找异常"]
+        A2["<b>快速报表</b><br/>成文：把数字变成能读的文字<br/>量产：登记为配方，批后自动重跑"]
+    end
+    U["<b>业务负责人 / 投委会 / 风控 / 审计</b><br/>用大白话提问，拿到每个数字都能追问「从哪来」的报告"]
+    H["<b>人：判断 · 签字 · 担责</b><br/>最后一道工序永远是人工复核、人工签发<br/>签字栏里不能是模型的名字"]
+
+    A1 ==>|"调用（每次留痕：问了什么 · 调了哪个接口 · 取自哪个批次）"| ENG
+    ENG ==>|"数字只向上流，不向下流"| A1
+    ENG ==> A2
+    A2 -.->|"纪律四：登记之后，不再经过 AI<br/>AI 负责创作，引擎负责量产"| ENG
+    U <==> AIL
+    U --> H
+
+    D["<b>四条纪律</b>：批次优先，能不现场算就不现场算 ｜ 缺数据就明说，不许硬凑<br/>三道工序一道不能少（AI 抽取 → 引擎校验 → 人工复核）｜ 创作与量产分开"]
+    ENG -.-> D
+
+    classDef navy fill:#0D2B42,color:#FFFFFF,stroke:#0D2B42,stroke-width:1.5px;
+    classDef orange fill:#F8982E,color:#FFFFFF,stroke:#F8982E,stroke-width:1.5px;
+    classDef gray fill:#8C8C8C,color:#FFFFFF,stroke:#8C8C8C,stroke-width:1.5px;
+    class E1,E2,U navy;
+    class A1,A2 orange;
+    class H,D gray;

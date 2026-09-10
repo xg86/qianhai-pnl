@@ -1,0 +1,19 @@
+%% 图 5-5 残差诊断流程图（ch05 §5.6）
+%% 主题：节点深蓝底白字 #0D2B42；强调/警示节点橙 #F8982E；决策/说明节点灰 #8C8C8C
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#0D2B42', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#0D2B42', 'lineColor': '#8C8C8C', 'fontFamily': 'SimHei, Noto Sans CJK SC, Microsoft YaHei, sans-serif', 'fontSize': '15px'}}}%%
+flowchart TD
+    R["归因残差<br/>＝ 总损益 − 全部已解释项之和"] --> Q{"残差 ÷ 总损益<br/>占比多少？"}
+    Q -- "＜ 5%" --> OK["正常：拆解可信<br/>（本月 3 万 ÷ 200 万 ＝ 1.5%）"]
+    Q -- "5% – 10%" --> C1["排查①线性近似与交叉项<br/>利率大动时三阶以上项漏进残差<br/>配置×选股等交互分不干净"]
+    Q -- "10% – 30%" --> C2["排查②口径缝隙与数据迟到<br/>收盘价 vs 估值价、现金流记账时点<br/>月末成交未入账、条款公告未录"]
+    Q -- "＞ 30%" --> C3["排查③口径切换<br/>条款补录 / 曲线更换 / 系统升级"]
+    C3 --> FIX["处理：切换日用新旧两套口径各估一次<br/>差额记「口径调整项」单独披露<br/>不藏进残差"]
+    OK -.-> NOTE["残差恒为零反而可疑——<br/>可能被悄悄塞进了某项"]
+    FIX -.-> CASE["案例：残差 80 万、占 40%<br/>＝月中补录 14 只分期还本债的还本计划<br/>不是投资收益，是估值修正（§5.6.3）"]
+
+    classDef navy fill:#0D2B42,color:#FFFFFF,stroke:#0D2B42,stroke-width:1.5px;
+    classDef orange fill:#F8982E,color:#FFFFFF,stroke:#F8982E,stroke-width:1.5px;
+    classDef gray fill:#8C8C8C,color:#FFFFFF,stroke:#8C8C8C,stroke-width:1.5px;
+    class R,OK,C1,C2 navy;
+    class C3,FIX orange;
+    class Q,NOTE,CASE gray;

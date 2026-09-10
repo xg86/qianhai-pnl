@@ -1,0 +1,21 @@
+%% 图 9-1 IFRS9 三分类决策树：两道门决定会计命运（ch09 §9.2）
+%% 主题：节点深蓝底白字 #0D2B42，强调节点橙 #F8982E，决策/警示节点灰 #8C8C8C
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#0D2B42', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#0D2B42', 'lineColor': '#8C8C8C', 'fontFamily': 'SimHei, Noto Sans CJK SC, Microsoft YaHei, sans-serif', 'fontSize': '15px'}}}%%
+flowchart TD
+    A["<b>金融资产分类</b>：两道客观测试决定会计命运<br/>不留「挑分类」的空间（IAS39 四分法的教训）"]
+    A --> Q1{"<b>第一道门：SPPI 测试</b><br/>合同现金流仅为本金＋利息？<br/>（时间价值、信用风险的对价）"}
+    Q1 -- "不过：现金流里混进了别的东西<br/>（挂钩股票/指数、带转股权、不保本）" --> F1["<b>FVTPL</b><br/>公允价值计量，变动全额进当期利润<br/>可转债：现金流里混进了一只股票<br/>雪球：连本金都不保障"]
+    Q1 -- "通过<br/>（普通固息/浮息/分期还本、3+2 含权中票一般过）" --> Q2{"<b>第二道门：业务模式测试</b><br/>持有这只债，打算怎么赚钱？<br/>（测的不是资产，是管理层意图）"}
+    Q2 -- "持有收取合同现金流" --> AC["<b>AC 摊余成本</b><br/>账面按 EIR 爬坡，市价涨跌不进表<br/>利息收入进 P&L"]
+    Q2 -- "既收现金流、又择机出售" --> FV["<b>FVOCI</b><br/>账面按公允价值<br/>变动先进 OCI，卖出时结转入利润"]
+    Q2 -- "交易获利、按公允价值管理考核" --> F2["<b>FVTPL</b><br/>公允价值计量<br/>变动全额进当期利润"]
+    AC -.-> W["<b>纪律</b>：分类一经确定，原则上不得重分类；测试留痕、审计可查<br/>「为什么是 AC」必须拿出业务模式证据（历史出售频率、考核方式、现金流压力下的出售安排）<br/>而不是「这样利润表好看」"]
+    FV -.-> W
+    F2 -.-> W
+
+    classDef navy fill:#0D2B42,color:#FFFFFF,stroke:#0D2B42,stroke-width:1.5px;
+    classDef orange fill:#F8982E,color:#FFFFFF,stroke:#F8982E,stroke-width:1.5px;
+    classDef gray fill:#8C8C8C,color:#FFFFFF,stroke:#8C8C8C,stroke-width:1.5px;
+    class A,AC,FV,F2 navy;
+    class F1 orange;
+    class Q1,Q2,W gray;

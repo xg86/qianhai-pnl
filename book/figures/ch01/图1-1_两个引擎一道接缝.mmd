@@ -1,0 +1,36 @@
+%% 图 1-1 两个引擎，一道接缝（ch01 §1.1）
+%% 主题：节点深蓝底白字 #0D2B42；强调节点橙 #F8982E；决策/警示节点灰 #8C8C8C
+%% 2026-09-09 修订：LR 改 TB 布局（原渲染 1584×298 过扁，书页中文字过小）；
+%%                   两引擎并排居上、问题链向下，字号 15px → 20px
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#0D2B42', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#0D2B42', 'lineColor': '#8C8C8C', 'fontFamily': 'SimHei, Noto Sans CJK SC, Microsoft YaHei, sans-serif', 'fontSize': '20px'}}}%%
+flowchart TB
+    subgraph RS["风险系统 · 向前看"]
+        direction TB
+        R1["VaR：明天有 99% 的把握<br/>亏损不超过多少"]
+        R2["压力测试：2022 年 11 月那波<br/>债市调整重演，会亏多少"]
+        R3["DV01：利率动一个基点<br/>市值动多少"]
+        R4["回答「未来可能亏多少」<br/>读者：风控与监管<br/>时间轴指向明天"]
+    end
+
+    subgraph VS["估值系统 · 向后看"]
+        direction TB
+        V1["同一批持仓<br/>昨天估一次，今天估一次"]
+        V2["两次估值之差＋今日现金流<br/>＝ 损益 200 万"]
+        V3["回答「过去赚了多少」<br/>读者：估值核算与财务<br/>时间轴停在昨天"]
+    end
+
+    Q["接缝上的问题：<br/>「这 200 万从哪来？」<br/>票息贡献多少 · 利率下行贡献多少 · 利差贡献多少"]
+    N["损益拆解＝两时点重定价＋因子视角<br/>只让时间走 → 票息贡献；只动利率曲线 → 曲线贡献；只动信用利差 → 利差贡献<br/>它不长在任何一套系统里，长在两套系统的接缝上"]
+    M["三个问题：时间的钱 / 市场的钱 / 信用的钱<br/>→ 三个管理动作：下个月还能不能赚（预测）· 功劳记给谁（考核）· 风险预算花在哪（风控）"]
+
+    RS -. "接缝：无人负责" .-> Q
+    VS -. "接缝：无人负责" .-> Q
+    Q ==> N
+    N -.-> M
+
+    classDef navy fill:#0D2B42,color:#FFFFFF,stroke:#0D2B42,stroke-width:1.5px;
+    classDef orange fill:#F8982E,color:#FFFFFF,stroke:#F8982E,stroke-width:1.5px;
+    classDef gray fill:#8C8C8C,color:#FFFFFF,stroke:#8C8C8C,stroke-width:1.5px;
+    class R1,R2,R3,R4,V1,V2,V3 navy;
+    class Q,N orange;
+    class M gray;

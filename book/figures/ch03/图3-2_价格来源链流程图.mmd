@@ -1,0 +1,25 @@
+%% 图 3-2 价格来源链：按优先级取价，全部缺失则明确报错（ch03 §3.2.4）
+%% 主题：节点深蓝底白字 #0D2B42；强调节点橙 #F8982E；决策/警示节点灰 #8C8C8C
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#0D2B42', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#0D2B42', 'lineColor': '#8C8C8C', 'fontFamily': 'SimHei, Noto Sans CJK SC, Microsoft YaHei, sans-serif', 'fontSize': '15px'}}}%%
+flowchart TD
+    S(["估值引擎取价<br/>（有市价按市价，无市价按条款与曲线）"]) --> P1["① 交易文件自带价格"]
+    P1 --> C1{"有有效价格？"}
+    C1 -- "是" --> U["采用该价格并完成估值<br/>来源、时点、口径全部留痕"]
+    C1 -- "否" --> P2["② 当日价格文件"]
+    P2 --> C2{"有有效价格？"}
+    C2 -- "是" --> U
+    C2 -- "否" --> P3["③ 30 天内历史价格文件"]
+    P3 --> C3{"有有效价格？"}
+    C3 -- "是" --> U
+    C3 -- "否" --> P4["④ 市场快照兜底"]
+    P4 --> C4{"有有效价格？"}
+    C4 -- "是" --> U
+    C4 -- "否" --> E["明确报错：<br/>「这个价格我给不了」<br/>把判断权交还给人"]
+    E -. "禁止" .-> X["静默沿用旧价 / 来路不明的默认值<br/>（退市债事故的根因）"]
+
+    classDef navy fill:#0D2B42,color:#FFFFFF,stroke:#0D2B42,stroke-width:1.5px;
+    classDef orange fill:#F8982E,color:#FFFFFF,stroke:#F8982E,stroke-width:1.5px;
+    classDef gray fill:#8C8C8C,color:#FFFFFF,stroke:#8C8C8C,stroke-width:1.5px;
+    class S,P1,P2,P3,P4,U navy;
+    class E orange;
+    class C1,C2,C3,C4,X gray;

@@ -1,0 +1,18 @@
+%% 图 7-4 3+2 中票行权日决策树：两个假设、两个价格、两个久期（ch07 §7.4）
+%% 主题：节点深蓝底白字 #0D2B42；强调节点橙 #F8982E；决策/警示节点灰 #8C8C8C
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#0D2B42', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#0D2B42', 'lineColor': '#8C8C8C', 'fontFamily': 'SimHei, Noto Sans CJK SC, Microsoft YaHei, sans-serif', 'fontSize': '15px'}}}%%
+flowchart TD
+    T0["<b>3+2 中票</b>：票面期限 5 年，票面利率 3.5%<br/>发行人持「调票权」 ＋ 投资者持「回售权」，互为对价"]
+    T0 --> T3{"第 3 年末 · 行权日<br/>（情景：市场利率已从 3.5% 降到 2.5%）"}
+    T3 -- "发行人下调票面 3.5% → 1.5%<br/>（新发只要 2.5%，凭什么继续付 3.5%）" --> P1["投资者算账：<br/>拿着 1.5% 票息，市价约 98 元<br/>行使回售权，按面值拿回 100 元"]
+    P1 --> R1["<b>集体回售 → 实际只活 3 年</b><br/>现金流：3.5 / 3.5 / 103.5<br/>净价约 102.9 元 · 修正久期约 2.8 年"]
+    T3 -- "发行人上调票面挽留<br/>（若利率上行至 4.5%）" --> R2["<b>投资者持有 → 活满 5 年</b><br/>现金流：3.5 元 × 5 期 ＋ 第 5 年末还本 100 元<br/>净价约 104.6 元 · 修正久期约 4.6 年"]
+    R1 -.-> CMP["同一只债：两个价格差约 1.8 元，两个久期差约 1.7 年<br/>5 亿持仓 DV01 差约 8.5 万<br/>估值政策必须显式给出假设，并写在报表上"]
+    R2 -.-> CMP
+
+    classDef navy fill:#0D2B42,color:#FFFFFF,stroke:#0D2B42,stroke-width:1.5px;
+    classDef orange fill:#F8982E,color:#FFFFFF,stroke:#F8982E,stroke-width:1.5px;
+    classDef gray fill:#8C8C8C,color:#FFFFFF,stroke:#8C8C8C,stroke-width:1.5px;
+    class T0,P1 navy;
+    class R1,R2 orange;
+    class T3,CMP gray;

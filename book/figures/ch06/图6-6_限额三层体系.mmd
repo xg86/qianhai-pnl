@@ -1,0 +1,28 @@
+%% 图 6-6 限额体系三层结构图（ch06 §6.7）
+%% 主题：节点深蓝底白字 #0D2B42；强调节点橙 #F8982E；说明/警示节点灰 #8C8C8C
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#0D2B42', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#0D2B42', 'lineColor': '#8C8C8C', 'fontFamily': 'SimHei, Noto Sans CJK SC, Microsoft YaHei, sans-serif', 'fontSize': '15px'}}}%%
+flowchart TD
+    L1["组合层：VaR 与压力损失设限<br/>PORT_BOND 10 日 99% VaR 限额 400 万<br/>压力情景损失限额 1000 万"]
+    L1Q["回答：整个组合最多能承担多大风险"]
+    L2["Desk 层：敏感性设限<br/>利率债 desk DV01 限额 10 万<br/>信用债 desk CS01 限额 15 万"]
+    L2Q["回答：每个台子能押多大的注"]
+    L3["交易员层：止损设限<br/>浮亏过线强制离场"]
+    L3Q["回答：个人行为的边界在哪"]
+    CVAR["成分 VaR 咬合：组合 VaR 分解到每个 desk，<br/>确保「各 desk 限额之和」与「组合限额」大体自洽"]
+    NOTE["限额不是天花板，是对话的起点：<br/>超限单强制全部门对一次「敞口意图」的对齐——<br/>主动加仓走临时限额调整流程，无意漂移回到目标久期"]
+
+    L1 --> L1Q
+    L1 --> L2
+    L2 --> L2Q
+    L2 --> L3
+    L3 --> L3Q
+    L1 <-.-> CVAR
+    CVAR <-.-> L2
+    L2 -.-> NOTE
+
+    classDef navy fill:#0D2B42,color:#FFFFFF,stroke:#0D2B42,stroke-width:1.5px;
+    classDef orange fill:#F8982E,color:#FFFFFF,stroke:#F8982E,stroke-width:1.5px;
+    classDef gray fill:#8C8C8C,color:#FFFFFF,stroke:#8C8C8C,stroke-width:1.5px;
+    class L1,L2,L3 navy;
+    class CVAR orange;
+    class L1Q,L2Q,L3Q,NOTE gray;

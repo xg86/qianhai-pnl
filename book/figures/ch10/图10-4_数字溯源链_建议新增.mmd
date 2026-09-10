@@ -1,0 +1,23 @@
+%% 图 10-4（建议新增）一个数字的溯源链（ch10 §10.5）
+%% 主题：节点深蓝底白字 #0D2B42；强调节点橙 #F8982E；决策/警示节点灰 #8C8C8C
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#0D2B42', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#0D2B42', 'lineColor': '#8C8C8C', 'fontFamily': 'SimHei, Noto Sans CJK SC, Microsoft YaHei, sans-serif', 'fontSize': '15px'}}}%%
+flowchart LR
+    R["<b>报告上的数字</b><br/>「骑乘贡献 +88 万」<br/>（AI 成文：只负责把数字写成人话）"]
+    M["<b>指标名</b><br/>ROLL_DOWN_PNL<br/>（引擎归因指标：骑乘效应）"]
+    B["<b>批次号</b><br/>batch_20260904_210733<br/>（估值日 2026-09-04）"]
+    S["<b>源数据快照</b><br/>当日持仓 + 当日曲线<br/>（与估值 · 风控 · 财务同一批）"]
+
+    R ==>|"每个数字挂三样东西"| M
+    M ==> B
+    B ==> S
+    R -.->|"每一环可点击下钻：<br/>「88 万是哪几只券带来的」→ 交易明细"| S
+
+    N["<b>AI 时代的审计标准</b>：任何质疑三分钟内落到源数据<br/>「不必质疑」不是信任，是验证之后的免检<br/>报告附注那行小字（与估值系统同源）不是客套，是报告能被审计接受的根本原因"]
+    B -.-> N
+
+    classDef navy fill:#0D2B42,color:#FFFFFF,stroke:#0D2B42,stroke-width:1.5px;
+    classDef orange fill:#F8982E,color:#FFFFFF,stroke:#F8982E,stroke-width:1.5px;
+    classDef gray fill:#8C8C8C,color:#FFFFFF,stroke:#8C8C8C,stroke-width:1.5px;
+    class M,B,S navy;
+    class R orange;
+    class N gray;

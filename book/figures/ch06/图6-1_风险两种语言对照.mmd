@@ -1,0 +1,28 @@
+%% 图 6-1 风险两种语言对照图（ch06 §6.1）
+%% 主题：节点深蓝底白字 #0D2B42；强调节点橙 #F8982E；说明/警示节点灰 #8C8C8C
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#0D2B42', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#0D2B42', 'lineColor': '#8C8C8C', 'fontFamily': 'SimHei, Noto Sans CJK SC, Microsoft YaHei, sans-serif', 'fontSize': '15px'}}}%%
+flowchart LR
+    subgraph REG["监管语言 —— 回答「机构会不会倒」"]
+        R1["资本充足率 · 风险加权资产<br/>99% 置信度 VaR · 压力测试"]
+        R2["关心极端情形：最坏情况下扛不扛得住<br/>读者：监管 · 董事会 · 存款人<br/>节奏：季度 / 年度"]
+        R3["像体检报告：<br/>「十年心血管风险 15%」"]
+        R1 --> R2 --> R3
+    end
+    subgraph BIZ["业务语言 —— 回答「今天怎么调」"]
+        B1["久期 · DV01 · CS01 · Delta"]
+        B2["关心日常情形：利率动 1bp 市值动多少<br/>读者：投资经理 · 交易员<br/>节奏：日 / 周"]
+        B3["像运动手表：<br/>「今天心率 140，配速 6 分半」"]
+        B1 --> B2 --> B3
+    end
+    ENG["翻译器：同一套估值引擎<br/>同一批持仓 · 同一张行情快照<br/>同一个重定价引擎"]
+    REG <--> ENG
+    ENG <--> BIZ
+    WARN["缺了翻译器，月末两套数字互相打架：<br/>风控拿 VaR 超限单，投资经理说市场很稳——<br/>冲突的根源不是谁对谁错，是两套语言之间缺一个翻译器"]
+    ENG -.-> WARN
+
+    classDef navy fill:#0D2B42,color:#FFFFFF,stroke:#0D2B42,stroke-width:1.5px;
+    classDef orange fill:#F8982E,color:#FFFFFF,stroke:#F8982E,stroke-width:1.5px;
+    classDef gray fill:#8C8C8C,color:#FFFFFF,stroke:#8C8C8C,stroke-width:1.5px;
+    class R1,B1 navy;
+    class ENG orange;
+    class R2,R3,B2,B3,WARN gray;

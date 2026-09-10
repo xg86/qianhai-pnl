@@ -1,0 +1,29 @@
+%% 图 13-0 实操包目录结构：解压即得的一个文件夹（ch13 §13.0「包里有什么」）
+%% 主题：节点深蓝底白字 #0D2B42；强调节点橙 #F8982E；决策/警示节点灰 #8C8C8C
+%% 分层：根节点（橙）→ 三个入口（橙）→ 四样组件（深蓝）→ 支撑目录（深蓝）→ 灰色注释「不用碰」
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#0D2B42', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#0D2B42', 'lineColor': '#8C8C8C', 'fontFamily': 'SimHei, Noto Sans CJK SC, Microsoft YaHei, sans-serif', 'fontSize': '15px'}}}%%
+flowchart TD
+    ROOT["<b>mve-handson/</b><br/>解压即得的一个文件夹<br/>没有安装程序 · 不写注册表 · 不需要管理员权限"]
+
+    ROOT ==> E1["<b>启动.bat</b><br/>双击开工：<br/>设环境 → 打开编辑器"]
+    ROOT ==> E2["<b>START_HERE.md</b><br/>入口文档，先读我"]
+    ROOT ==> E3["<b>hello-valuation/</b><br/>一键自检：<br/>3 分钟出第一张报表"]
+
+    ROOT --> C1["<b>cursor/</b><br/>AI 编辑器（免安装）<br/>问数 · 诊断 · 成文的地方"]
+    ROOT --> C2["<b>mve_batches/</b><br/>MVE 示例批次<br/>书里每个数字的出处<br/>真实计算的留档，不是摆的样品"]
+    ROOT --> C3["<b>mcp_python/</b><br/>便携计算环境<br/>Python + MCP + MVE 引擎<br/>免安装 · 版本锁定 · 实时试算"]
+    ROOT --> C4["<b>data/</b><br/>positions 示例持仓（已脱敏）<br/>market 离线行情快照<br/>news 离线资讯样本"]
+
+    ROOT --> S1["<b>.cursor/skills/</b><br/>预制技能：<br/>报表生成 · 策略生成 · 指标查询"]
+    ROOT --> S2["<b>reports/</b><br/>你生成的报告都放这里"]
+    ROOT --> S3["<b>docs/</b><br/>使用说明与常见问题"]
+
+    C1 -.-> N["<b>两层「不用碰」</b><br/>cursor/ 与 mcp_python/ 是运行时<br/>像汽车的发动机舱——正常驾驶不用打开<br/>出了问题，查 docs/ 里的检修手册"]
+    C3 -.-> N
+
+    classDef navy fill:#0D2B42,color:#FFFFFF,stroke:#0D2B42,stroke-width:1.5px;
+    classDef orange fill:#F8982E,color:#FFFFFF,stroke:#F8982E,stroke-width:1.5px;
+    classDef gray fill:#8C8C8C,color:#FFFFFF,stroke:#8C8C8C,stroke-width:1.5px;
+    class C1,C2,C3,C4,S1,S2,S3 navy;
+    class ROOT,E1,E2,E3 orange;
+    class N gray;

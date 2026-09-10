@@ -1,0 +1,30 @@
+%% 图 12-3 条款治理流水线：宁可报错，绝不猜（ch12 §12.3）
+%% 主题：节点深蓝底白字 #0D2B42；强调节点橙 #F8982E；决策/警示节点灰 #8C8C8C
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#0D2B42', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#0D2B42', 'lineColor': '#8C8C8C', 'fontFamily': 'SimHei, Noto Sans CJK SC, Microsoft YaHei, sans-serif', 'fontSize': '15px'}}}%%
+flowchart LR
+    A["<b>条款扫描</b><br/>每日估值前先做一次<br/>条款齐备性检查"]
+    B{"<b>齐备性检查</b><br/>条款字段<br/>是否齐备？"}
+    C["<b>进引擎计算</b><br/>条款齐备则自行计算<br/>按条款推现金流，按行情定价"]
+    D["<b>报错清单</b><br/>逐条注明：哪只券 · 缺哪个字段<br/>· 影响哪些指标，按影响金额排序<br/>—— 不用默认值掩盖问题"]
+    E["<b>人工补录</b><br/>两个来源：公开条款扫描<br/>（发行公告 · 募集说明书）＋ 人工录入"]
+    F["<b>复算归档</b><br/>补录后复算，复算留痕<br/>估值日当天报错、当天补录、当天复算"]
+
+    A ==> B
+    B ==>|"齐备"| C
+    B ==>|"缺失"| D
+    D ==> E
+    E ==> F
+    F -.->|"补录完成，回到正常流程"| A
+
+    G["<b>三道工序闭环</b>：AI 抽取（读上百页募集说明书，抽出条款字段）<br/>→ 引擎校验（抽出的条款生成现金流，与历史兑付对账）→ 人工复核（罕见条款、冲突条款交给人）"]
+    D -.-> G
+
+    H["<b>报错清单是数据治理的进度条</b><br/>东江资管：上线第一个月 47 条 → 第三个月只剩 3 条<br/>（全是新发含权债，募集说明书刚挂网）<br/>问题从「月底的考古现场」变成「当天的工作清单」"]
+    D -.-> H
+
+    classDef navy fill:#0D2B42,color:#FFFFFF,stroke:#0D2B42,stroke-width:1.5px;
+    classDef orange fill:#F8982E,color:#FFFFFF,stroke:#F8982E,stroke-width:1.5px;
+    classDef gray fill:#8C8C8C,color:#FFFFFF,stroke:#8C8C8C,stroke-width:1.5px;
+    class A,C,E,F navy;
+    class D orange;
+    class B,G,H gray;

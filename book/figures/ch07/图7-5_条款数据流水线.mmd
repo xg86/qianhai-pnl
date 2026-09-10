@@ -1,0 +1,24 @@
+%% 图 7-5 条款数据流水线（ch07 §7.6.1 / §7.6.3）
+%% 主题：节点深蓝底白字 #0D2B42；强调节点橙 #F8982E；决策/警示节点灰 #8C8C8C
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#0D2B42', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#0D2B42', 'lineColor': '#8C8C8C', 'fontFamily': 'SimHei, Noto Sans CJK SC, Microsoft YaHei, sans-serif', 'fontSize': '15px'}}}%%
+flowchart LR
+    SRC["条款权威来源<br/>募集说明书（发行时写死的静态条款）<br/>存续期公告（还本付息 · 票面利率调整）"]
+    GET["取数<br/>数据商正式取数优先<br/>公开渠道扫描兜底（结构化字段优先，公告原文交叉校验）"]
+    REV["人工复核（留痕）<br/>出自哪份文件 · 谁复核的 · 哪天生效"]
+    TBL["条款表<br/>还本计划 · 票息日程 · 调票面规则 · 嵌入式权利"]
+    ENG["估值引擎"]
+    OK["条款齐备 → 引擎自行计算<br/>出估值结果"]
+    ERR["条款缺失 → 明确报错<br/>分期债无还本计划：报「条款缺失」，不按子弹债出数<br/>3+2 无假设票面：预警「未来票面未知」<br/>未支持的条款类型：预警「未建模」"]
+    NOTE["错得清楚，好过错得安静：<br/>条款差异集中在特定品种静默爆发、量级百分之几十，<br/>报错是把判断权交还给人"]
+
+    SRC --> GET --> REV --> TBL --> ENG
+    ENG --> OK
+    ENG --> ERR
+    ERR -.-> NOTE
+
+    classDef navy fill:#0D2B42,color:#FFFFFF,stroke:#0D2B42,stroke-width:1.5px;
+    classDef orange fill:#F8982E,color:#FFFFFF,stroke:#F8982E,stroke-width:1.5px;
+    classDef gray fill:#8C8C8C,color:#FFFFFF,stroke:#8C8C8C,stroke-width:1.5px;
+    class SRC,GET,REV,TBL navy;
+    class ENG,OK orange;
+    class ERR,NOTE gray;

@@ -1,0 +1,29 @@
+%% 图 11-2 报表生成五步留痕流程（ch11 §11.2 场景一）
+%% 主题：节点深蓝底白字 #0D2B42；强调节点橙 #F8982E；决策/警示节点灰 #8C8C8C
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#0D2B42', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#0D2B42', 'lineColor': '#8C8C8C', 'fontFamily': 'SimHei, Noto Sans CJK SC, Microsoft YaHei, sans-serif', 'fontSize': '15px'}}}%%
+flowchart TD
+    S0["<b>王岚的一句话</b><br/>「帮我生成上周固收组合 FI-01 的归因报告，<br/>周三决策会要用，风格正式一点」"]
+    S1["<b>第一步 · 确认口径（而不是急着动手）</b><br/>组合 FI-01 ｜ 时间窗 2026-08-31 至 09-04（5 个交易日）<br/>Campisi 六项 ｜ 数据来自批次 batch_20260904_210733"]
+    S2{"<b>第二步 · 检查数据在不在</b><br/>5 个交易日估值快照齐全？<br/>归因指标全部非空？"}
+    M["<b>缺数据就明说，不许硬凑</b><br/>报告里明确标注「该日数据缺失」<br/>而不是悄悄插值出一个「合理的数」（纪律二）"]
+    S3["<b>第三步 · 取数（四组数据全部来自批次）</b><br/>组合总貌：市值 61.8 亿 · 久期 4.62 · YTM 2.31%<br/>周度 Campisi 六项 · 分品种贡献 · 逐日 PnL 走势<br/>没有一个是 AI 算的 —— 批次优先，与估值系统同一批数"]
+    S4["<b>第四步 · 编排成文</b><br/>六项排成表 · 分品种贡献画瀑布 · 写三段结论<br/>只描述数字呈现的事实，不下投资判断"]
+    S5["<b>第五步 · 渲染成正式报表</b><br/>HTML + PDF 各一份<br/>附注：全部数字来自批次 batch_20260904_210733，逐项可下钻"]
+    R1["<b>改稿</b>：「分品种表加一列久期」<br/>改脚本、重渲染，十秒出新版<br/>—— 不是重新生成"]
+    R2["<b>登记为配方</b>：挂到批后流程<br/>每周一批次跑完自动重跑<br/>—— 登记之后，不再经过 AI（纪律四）"]
+    R3["<b>人工复核</b>：与估值岗周报对账<br/>总收益 · 票息 · 曲线损失三项全部一致<br/>会上被问「88 万哪来的」，当场下钻三秒调出明细"]
+
+    S0 --> S1 --> S2
+    S2 -- "齐全" --> S3
+    S2 -- "有缺口" --> M --> S3
+    S3 --> S4 --> S5
+    S5 --> R1
+    S5 --> R2
+    S5 --> R3
+
+    classDef navy fill:#0D2B42,color:#FFFFFF,stroke:#0D2B42,stroke-width:1.5px;
+    classDef orange fill:#F8982E,color:#FFFFFF,stroke:#F8982E,stroke-width:1.5px;
+    classDef gray fill:#8C8C8C,color:#FFFFFF,stroke:#8C8C8C,stroke-width:1.5px;
+    class S0,S1,S3,S4,S5 navy;
+    class R1,R2,R3 orange;
+    class S2,M gray;

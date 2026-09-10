@@ -1,0 +1,22 @@
+%% 图 5-1 损益拆解三维度框架图（ch05 §5.1.2）
+%% 主题：节点深蓝底白字 #0D2B42；强调节点橙 #F8982E；说明/决策节点灰 #8C8C8C
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#0D2B42', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#0D2B42', 'lineColor': '#8C8C8C', 'fontFamily': 'SimHei, Noto Sans CJK SC, Microsoft YaHei, sans-serif', 'fontSize': '15px'}}}%%
+flowchart TD
+    PNL["组合总损益 +200 万<br/>同一批持仓 · 同一张行情快照<br/>＝期初期末两次同源估值之差＋期间现金流"]
+    PNL --> T["时间维度（Campisi 框架）<br/>票息 / 收敛 / 骑乘<br/>vs 国债效应 / 利差效应 / 凸性"]
+    PNL --> F["因子维度<br/>利率 / 信用 / 权益 / 商品 / 外汇<br/>利率再细分：平行移动 / 形态变化 / 期限段"]
+    PNL --> D["决策维度（Brinson 模型）<br/>配置 / 选择 / 择时"]
+    T --> TQ["回答：能不能复制？<br/>下个月利率不动还能赚多少<br/>读者：投委会"]
+    F --> FQ["回答：赚的是什么风险的钱？<br/>风险预算花在哪<br/>读者：风控"]
+    D --> DQ["回答：功劳记给谁？<br/>配置对了还是选股对了<br/>读者：考核"]
+    NOTE["三个维度不互斥：同一份损益的三副眼镜——<br/>共用同一份损益、同一批持仓、同一张行情快照，否则月末三套数字互相打架"]
+    TQ -.-> NOTE
+    FQ -.-> NOTE
+    DQ -.-> NOTE
+
+    classDef navy fill:#0D2B42,color:#FFFFFF,stroke:#0D2B42,stroke-width:1.5px;
+    classDef orange fill:#F8982E,color:#FFFFFF,stroke:#F8982E,stroke-width:1.5px;
+    classDef gray fill:#8C8C8C,color:#FFFFFF,stroke:#8C8C8C,stroke-width:1.5px;
+    class T,F,D navy;
+    class PNL orange;
+    class TQ,FQ,DQ,NOTE gray;

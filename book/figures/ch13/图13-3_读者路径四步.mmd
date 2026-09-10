@@ -1,0 +1,28 @@
+%% 图 13-3 读者路径四步：问数 → 诊断 → 成文 → 登记（ch13 §13.2）
+%% 主题：节点深蓝底白字 #0D2B42；强调节点橙 #F8982E；决策/警示节点灰 #8C8C8C
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#0D2B42', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#0D2B42', 'lineColor': '#8C8C8C', 'fontFamily': 'SimHei, Noto Sans CJK SC, Microsoft YaHei, sans-serif', 'fontSize': '15px'}}}%%
+flowchart LR
+    S["<b>小苏的第一段对话</b><br/>顺序有讲究：不要一上来就要报告<br/>信任从一个小验证开始，<br/>不从一份漂亮的报告开始"]
+
+    Q1["<b>第一步 · 问数（建立信任）</b><br/>「FI-01 现在多少只券？总市值？久期？」<br/>→ 32 只 · 61.8 亿 · 久期 4.62 · YTM 2.31%<br/>（批次 batch_20260911_210558）<br/>亲手打开批次 CSV 对上 —— 信任是验证出来的"]
+    Q2["<b>第二步 · 诊断（找异常）</b><br/>「上周哪天亏得最多？为什么？」<br/>→ 周三 -386 万，其中 -342 万来自曲线变动<br/>（5-10 年段上行约 3bp × 久期 4.62，方向一致）<br/>数字是引擎的，定位是 AI 的"]
+    Q3["<b>第三步 · 成文（出报告）</b><br/>「生成 FI-01 上周周度归因报告，正式一点」<br/>→ 四十秒：确认口径 → 检查数据 → 批次取数<br/>→ 编排成文 → 渲染 HTML + PDF<br/>附注挂着批次号，逐项可下钻"]
+    Q4["<b>第四步 · 登记（量产）</b><br/>「以后每周一早上自动出一份」<br/>→ 登记为周度配方，批后自动重跑<br/>登记之后不再经过 AI ——<br/>创作享受 AI 的灵活，量产享受引擎的确定性"]
+
+    S ==> Q1
+    Q1 ==>|"数字能在批次里找到，再托付更大的任务"| Q2
+    Q2 ==> Q3
+    Q3 ==> Q4
+
+    V["<b>最后一个动作（全书反复强调）</b><br/>挑报告里「骑乘效应 +96 万」问：这个数从哪来？<br/>→ 批次号 · 指标名 ROLL_DOWN_PNL · 估值日<br/>→ 下钻到贡献最大的三只券"]
+    Q4 -.-> V
+
+    N["<b>四步走完</b>：信任 · 诊断 · 产出 · 量产 ——<br/>工具从「别人的系统」变成「我的工作台」<br/>以后每周一只需核对一件事：批次号是不是新的"]
+    V -.-> N
+
+    classDef navy fill:#0D2B42,color:#FFFFFF,stroke:#0D2B42,stroke-width:1.5px;
+    classDef orange fill:#F8982E,color:#FFFFFF,stroke:#F8982E,stroke-width:1.5px;
+    classDef gray fill:#8C8C8C,color:#FFFFFF,stroke:#8C8C8C,stroke-width:1.5px;
+    class Q1,Q2,Q3,Q4 navy;
+    class S orange;
+    class V,N gray;
